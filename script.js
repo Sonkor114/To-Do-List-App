@@ -20,6 +20,15 @@ document.addEventListener('DOMContentLoaded', function(){
             text: tasktext,
             completed: false
         };
-        
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks.push(tasks);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        randerTask(task);
+        taskInput.value = '';
+    }
+    function loadTasks(){
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks.forEach(randerTask);
     }
 })
