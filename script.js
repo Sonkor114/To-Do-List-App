@@ -31,4 +31,19 @@ document.addEventListener('DOMContentLoaded', function(){
         let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
         tasks.forEach(randerTask);
     }
+    function randerTask(task){
+        const li = document.createElement('li');
+        li.dataset.id = task.id;
+        if(task.completed) li.classList.add('completed');
+        li.innerHTML = `
+        <span>${task.text}</span>
+        <div>
+        <button class="complete-btn"></buttom>
+        <button class="delete-btn"></buttom>
+        </div>
+        `;
+        li.querySelector('.complete-btn').addEventListener('click', toggleComplete);
+        li.querySelector('.delete-btn').addEventListener('click', deleteTask);
+    }
+    
 })
