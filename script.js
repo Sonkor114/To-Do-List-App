@@ -20,52 +20,6 @@ document.addEventListener('DOMContentLoaded', function(){
             text: tasktext,
             completed: false
         };
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-        tasks.push(tasks);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-
-        randerTask(task);
-        taskInput.value = '';
+        
     }
-    function loadTasks(){
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-        tasks.forEach(randerTask);
-    }
-    function randerTask(task){
-        const li = document.createElement('li');
-        li.dataset.id = task.id;
-        if(task.completed) li.classList.add('completed');
-        li.innerHTML = `
-        <span>${task.text}</span>
-        <div>
-        <button class="complete-btn"></buttom>
-        <button class="delete-btn"></buttom>
-        </div>
-        `;
-        li.querySelector('.complete-btn').addEventListener('click', toggleComplete);
-        li.querySelector('.delete-btn').addEventListener('click', deleteTask);
-        taskList.appendChild(li);
-    }
-    function toggleComplete(e){
-        const li = e.target.closest('li');
-        const taskId = parseInt(li.dataset.id);
-
-        let tasks = JSON.parse(localStorage.getItem('tasks'));
-        const taskIndex = tasks.findIndex(task => task.id === taskId);
-        tasks(taskIndex).completed = !tasks[taskIndex].completed
-        localStorage.setItem('tasks', JDON.stringify(tasks));
-
-        li.classList.toggle('completed');
-    }
-
-    function deleteTask(e){
-        const li = e.target.closest('li');
-        const taskId = parseInt(li.dataset.id);
-
-        let tasks = JSON.parse(localStorage.getItem('tasks'));
-        tasks = tasks.filter(task => task.id !== taskId);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        li.remove();
-    }
-
 })
